@@ -1,11 +1,16 @@
 const express = require('express')
 const app = express()
 
+<<<<<<< HEAD
 app.get('/', (req, res) => res.send('Hello Worldsss!'))
+=======
+app.get('/', (req, res) => res.send('Hello from Poland & India!'))
+>>>>>>> 29a340b61e535aa86a844dbca12b193cde47a1d2
 
 app.listen(3000, () => console.log('Example app listening on port 3000!'))
 
 
+<<<<<<< HEAD
 let event1 = {
   id: "1" ,
   title: "Homie" ,
@@ -35,3 +40,8 @@ let events = {
 
 app.get('/events', (req, res) => res.send(events));
 app.get('/events/:1', (req, res) => res.send(events[1]));
+=======
+app.post('/', function (req, res) {
+  res.send('Got a POST request')
+})
+>>>>>>> 29a340b61e535aa86a844dbca12b193cde47a1d2
