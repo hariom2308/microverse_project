@@ -1,14 +1,37 @@
-const http = require('http');
+const express = require('express')
+const app = express()
 
-const hostname = '127.0.0.1';
-const port = 3000;
+app.get('/', (req, res) => res.send('Hello Worldsss!'))
 
-const server = http.createServer((req, res) => {
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'text/plain');
-  res.end('Hello World!\n');
-});
+app.listen(3000, () => console.log('Example app listening on port 3000!'))
 
-server.listen(port, hostname, () => {
-  console.log(`Server running at http://${hostname}:${port}/`);
-});
+
+let event1 = {
+  id: "1" ,
+  title: "Homie" ,
+  description: "Its happening on Saturday",
+  date: "23.06.2018"
+};
+
+let event2 = {
+  id: "2" ,
+  title: "Baba" ,
+  description: "Black sheep",
+  date: "24.06.2018"
+};
+
+let event3 = {
+  id: "3" ,
+  title: "Ewaa" ,
+  description: "Trip to Poland on Friday",
+  date: "02.06.2018"
+};
+
+let events = {
+  1: "event1" ,
+  2: "event2" ,
+  3: "event3"
+};
+
+app.get('/events', (req, res) => res.send(events));
+app.get('/events/:1', (req, res) => res.send(events[1]));
