@@ -1,0 +1,23 @@
+{
+  "name": "restapiproject",
+  "version": "1.0.0",
+  "description": "Our first API creation",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/ewamal/microverse_project.git"
+  },
+  "keywords": [
+    "api"
+  ],
+  "author": "Ewa & Hari",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ewamal/microverse_project/issues"
+  },
+  "homepage": "https://github.com/ewamal/microverse_project#readme"
+}
