@@ -38,8 +38,8 @@ let events = {
 };
 
 app.get('/events', (req, res) => res.send(events));
-app.get('/events/:id', (req, res) => res.send(events.param));
-=======
+app.get('/events/:id', (req, res) => res.send(events[req.params.id]));
+
 app.post('/', function (req, res) {
-  res.send('Got a POST request')
-})
+  res.send('Got a POST request');
+});
