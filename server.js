@@ -38,8 +38,11 @@ let events = {
 };
 
 app.get('/events', (req, res) => res.send(events));
-app.get('/events/:id', (req, res) => res.send(events[req.params.id]));
-
-app.post('/', function (req, res) {
-  res.send('Got a POST request');
-});
+app.get('/events/:id', function(req, res) {
+if (!events.hasOwnProperty(req.params.id)) {
+  res.status(404).send('error 404');
+  } else {
+    res.send(events[req.params.id]);
+  }
+}
+);
