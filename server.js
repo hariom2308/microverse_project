@@ -55,12 +55,12 @@ app.post('/', function (req, res) {
 });
 
 
-app.post('/POST/events', function(req, res) {
-    let id = Object.keys(events).length + 1;
+app.post('/events', function(req, res) {
+    let id = (Object.keys(events).length + 1).toString();
     let title = req.body.title;
     let description = req.body.description;
     let date = req.body.date;
     newEvent = {"id": id, "title": title, "description": description, "date": date};
-    events.id = newEvent;
+    events[id] = newEvent;
     res.send(newEvent);
 });
