@@ -1,7 +1,9 @@
 const express = require('express')
 const app = express()
 
-
+let bodyParser = require('body-parser');
+app.use(bodyParser.json()); // support json encoded bodies
+app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
 app.get('/', (req, res) => res.send('Hello from Poland & India!'))
 
@@ -42,4 +44,15 @@ app.get('/events/:id', (req, res) => res.send(events[req.params.id]));
 
 app.post('/', function (req, res) {
   res.send('Got a POST request');
+});
+
+
+app.post('/POST/events', function(req, res) {
+    let id = Object.keys(events).length + 1;
+    let title = req.body.title;
+    let description = req.body.description;
+    let date = req.body.date;
+    newEvent = {"id": id, "title": title, "description": description, "date": date};
+    events.id = newEvent;
+    res.send(newEvent);
 });
