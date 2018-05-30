@@ -54,9 +54,30 @@ app.post('/events', function(req, res) {
     let title = req.body.title;
     let description = req.body.description;
     let date = req.body.date;
+<<<<<<< HEAD
     res.json({"id": id, "title": title, "description": description, "date": date});
 });
 
 app.patch('/events/:id', function (req,res) {
   res.json({ id: req.params.id, name: 'new one' });
+=======
+    let newEvent = {"id": id, "title": title, "description": description, "date": date};
+    events[id] = newEvent;
+    res.send(newEvent);
+>>>>>>> cb5af764bf5a820f1b8798a7a0a1a7fef355aa93
 });
+
+app.patch('/events/:id', function(req, res) {
+if (!events.hasOwnProperty(req.params.id)) {
+  res.status(404).send('Not a valid event id');
+  } else {
+    id = req.params.id;
+    title = req.body.title;
+    description = req.body.description;
+    date = req.body.date;
+
+    events[id] = req.body ;
+    res.send(events[req.params.id]);
+  }
+}
+);
