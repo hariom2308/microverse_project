@@ -58,7 +58,5 @@ app.post('/events', function(req, res) {
 });
 
 app.patch('/events/:id', function (req,res) {
-  res.json({ id: req.params.id, name: 'new one' });
-    let newEvent = {"id": id, "title": title, "description": description, "date": date};
+  res.json({ id: req.body.id, title: req.body.title});
 });
-
