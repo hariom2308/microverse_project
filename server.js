@@ -11,7 +11,6 @@ app.get('/', (req, res) => res.send('Hello from Poland & India!'))
 app.listen(3000, () => console.log('Example app listening on port 3000!'))
 
 
-
 let event1 = {
   id: "1" ,
   title: "Homie" ,
@@ -50,17 +49,14 @@ if (!events.hasOwnProperty(req.params.id)) {
 }
 );
 
-app.post('/', function (req, res) {
-  res.send('Got a POST request');
-});
-
-
 app.post('/events', function(req, res) {
     let id = (Object.keys(events).length + 1).toString();
     let title = req.body.title;
     let description = req.body.description;
     let date = req.body.date;
-    newEvent = {"id": id, "title": title, "description": description, "date": date};
-    events[id] = newEvent;
-    res.send(newEvent);
+    res.json({"id": id, "title": title, "description": description, "date": date});
+});
+
+app.patch('/events/:id', function (req,res) {
+  res.json({ id: req.params.id, name: 'new one' });
 });
