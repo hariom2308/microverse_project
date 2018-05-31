@@ -40,7 +40,7 @@ let events = {
 
 app.get('/events', (req, res) => res.send(events));
 
-app.get('/events/:id', function(req, res) {
+app.get('/events/:id', (req, res) => {
   if (!events.hasOwnProperty(req.params.id)) {
     res.status(404).send('error 404');
     } else {
@@ -49,7 +49,7 @@ app.get('/events/:id', function(req, res) {
   }
 );
 
-app.post('/events', function(req, res) {
+app.post('/events', (req, res) => {
     let id = (Object.keys(events).length + 1).toString();
     let title = req.body.title;
     let description = req.body.description;
@@ -59,7 +59,7 @@ app.post('/events', function(req, res) {
 });
 
 
-app.patch('/events/:id', function(req, res) {
+app.patch('/events/:id', (req, res) => {
   if (!events.hasOwnProperty(req.params.id)) {
     res.status(404).send('Not a valid event id');
     } else {
@@ -73,7 +73,7 @@ app.patch('/events/:id', function(req, res) {
   }
 );
 
-app.delete('/events/:id', function(req,res) {
+app.delete('/events/:id', (req,res) => {
   if (!events.hasOwnProperty(req.params.id)) {
     res.status(404).send('Not a valid event id');
     } else {
