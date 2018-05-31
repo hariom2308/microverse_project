@@ -69,13 +69,19 @@ app.patch('/events/:id', function(req, res) {
 if (!events.hasOwnProperty(req.params.id)) {
   res.status(404).send('Not a valid event id');
   } else {
-    id = req.params.id;
-    title = req.body.title;
-    description = req.body.description;
-    date = req.body.date;
+    let id;
+    if (req.body.id){
+      id = req.body.id;
+    } else {
+      id = events[req.params.id]["id"] ;
+    }
 
-    events[id] = req.body ;
-    res.send(events[req.params.id]);
+    let title = req.body.title;
+    let description = req.body.description;
+    let date = req.body.date;
+    let updatedEvent = {"id": id, "title": title, "description": description, "date": date};
+    events[id] = updatedEvent ;
+    res.send(updatedEvent);
   }
 }
 );
