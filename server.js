@@ -78,6 +78,6 @@ app.delete('/events/:id', function(req,res) {
     res.status(404).send('Not a valid event id');
     } else {
       delete events[req.params.id];
-      res.send('deleted');
+      res.send('');
     }
   });
