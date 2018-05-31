@@ -1,5 +1,5 @@
-const express = require('express')
-const app = express()
+const express = require('express');
+const app = express();
 
 let bodyParser = require('body-parser');
 app.use(bodyParser.json()); // support json encoded bodies
@@ -9,7 +9,6 @@ app.get('/', (req, res) => res.send('Hello from Poland & India!'))
 
 
 app.listen(3000, () => console.log('Example app listening on port 3000!'))
-
 
 
 let event1 = {
@@ -42,18 +41,13 @@ let events = {
 app.get('/events', (req, res) => res.send(events));
 
 app.get('/events/:id', function(req, res) {
-if (!events.hasOwnProperty(req.params.id)) {
-  res.status(404).send('error 404');
-  } else {
-    res.send(events[req.params.id]);
+  if (!events.hasOwnProperty(req.params.id)) {
+    res.status(404).send('error 404');
+    } else {
+      res.send(events[req.params.id]);
+    }
   }
-}
 );
-
-app.post('/', function (req, res) {
-  res.send('Got a POST request');
-});
-
 
 app.post('/events', function(req, res) {
     let id = (Object.keys(events).length + 1).toString();
@@ -61,9 +55,10 @@ app.post('/events', function(req, res) {
     let description = req.body.description;
     let date = req.body.date;
     let newEvent = {"id": id, "title": title, "description": description, "date": date};
+    res.json({"id": id, "title": title, "description": description, "date": date});
     events[id] = newEvent;
-    res.send(newEvent);
 });
+
 
 app.patch('/events/:id', function(req, res) {
 if (!events.hasOwnProperty(req.params.id)) {
