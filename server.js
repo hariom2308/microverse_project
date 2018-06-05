@@ -84,3 +84,6 @@ app.delete('/events/:id', function(req, res) {
   delete events[req.params.id];
   res.send('');
 });
+
+
+module.exports = app;
