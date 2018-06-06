@@ -1,12 +1,9 @@
 const express = require('express');
 const app = express();
+const bodyParser = require('body-parser');
 
-let bodyParser = require('body-parser');
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
-
-app.get('/', (req, res) => res.send('Hello from Poland & India!'))
-
 
 app.listen(3000, () => console.log('Example app listening on port 3000!'))
 
@@ -37,6 +34,7 @@ let events = {
   2: event2,
   3: event3
 };
+
 
 app.get('/events', (req, res) => res.send(events));
 
@@ -80,7 +78,10 @@ if (!events.hasOwnProperty(req.params.id)) {
   }
 }
 );
+
 app.delete('/events/:id', function(req, res) {
   delete events[req.params.id];
   res.send('');
 });
+
+module.exports = app;
