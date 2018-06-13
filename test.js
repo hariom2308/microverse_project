@@ -45,12 +45,35 @@ describe ('/POST event', () => {
 
 
 describe('/GET events/:id', () => {
-  it('should GET an event by id', (done) => {
+  it('should return an event by id', (done) => {
     chai.request(server)
       .get('/events/2')
       .end((err, res) => {
         res.should.have.status(200);
         res.body.should.be.a('object');
+        done();
+      });
+  });
+});
+
+describe('/PATCH events/:id', () => {
+  it('should update an event', (done) => {
+    chai.request(server)
+      .get('/events/3')
+      .end((err, res) => {
+        res.should.have.status(200);
+        res.body.should.be.a('object');
+        done();
+      });
+  });
+});
+
+describe('/DELETE events/:id', () => {
+  it('should DELETE an event by id', (done) => {
+    chai.request(server)
+      .get('/events/4')
+      .end((err, res) => {
+        res.should.have.status(404);
         done();
       });
   });
