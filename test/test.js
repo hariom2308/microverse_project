@@ -1,19 +1,19 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
-const server = require('./server');
+const server = require('../server');
 const should = chai.should();
 
 chai.use(chaiHttp);
 
 describe('/GET events', () => {
-  it('should GET all the events', (done) => {
+  it.only('should GET all the events', (done) => {
     chai.request(server)
       .get('/events')
       .end((err, res) => {
         res.should.have.status(200);
-        res.body.should.be.a('object');
         done();
-      });
+      })
+      .close();
   });
 });
 
@@ -21,10 +21,9 @@ describe ('/POST event', () => {
   
   it('it should POST a event', (done) => {
     let event12 = {
-      id: 12,
       title: "tie",
       description: "qwewew",
-      date: "13.06.2019"
+      date: "12.06.2019"
     }
 
     chai.request(server)
@@ -33,8 +32,7 @@ describe ('/POST event', () => {
       .end((err, res) => {
         res.should.have.status(200);
         res.body.should.be.a('object');
-        
-        res.body.should.have.property('id');
+        res.body.should.have.property('_id');
         res.body.should.have.property('title');
         res.body.should.have.property('description');
         res.body.should.have.property('date');
@@ -47,7 +45,7 @@ describe ('/POST event', () => {
 describe('/GET events/:id', () => {
   it('should return an event by id', (done) => {
     chai.request(server)
-      .get('/events/2')
+      .get('/events/5b279b40ee9f7656bde554d2')
       .end((err, res) => {
         res.should.have.status(200);
         res.body.should.be.a('object');
@@ -59,22 +57,33 @@ describe('/GET events/:id', () => {
 describe('/PATCH events/:id', () => {
   it('should update an event', (done) => {
     chai.request(server)
-      .get('/events/3')
+      .patch('/events/5b227f112f63c531d0c491dd')
+      .send({description: "ewa"})
       .end((err, res) => {
         res.should.have.status(200);
-        res.body.should.be.a('object');
-        done();
+        chai.request(server)
+        .get('/events/5b227d496b61f031aa88168c')
+        .end((err, res) => {
+          res.should.have.status();
+          res.body.description.should.equal('ewa');
+          done();
+        });
       });
   });
 });
 
 describe('/DELETE events/:id', () => {
-  it('should DELETE an event by id', (done) => {
-    chai.request(server)
-      .get('/events/4')
-      .end((err, res) => {
-        res.should.have.status(404);
-        done();
-      });
-  });
+  it('should DELETE an event by id', (done) => {
+    chai.request(server)
+    .delete('/events/5b227d496b61f031aa88168c')
+    .end((err, res) => {
+      res.should.have.status(200);
+      chai.request(server)
+      .get('/events/5b227d496b61f031aa88168c')
+      .end((err, res) => {
+        res.should.have.status(404);
+        done();
+      });
+    });
+  });
 });

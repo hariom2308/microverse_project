@@ -6,6 +6,7 @@ const eventSchema = mongoose.Schema({
   description: String,
   date: Date
   //TO DO: date is saved in different timezone
+  //TO DO: add indexes
 });
 
 module.exports = mongoose.model('Event', eventSchema);

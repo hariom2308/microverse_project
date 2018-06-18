@@ -15,7 +15,7 @@ router.post('/', function(req, res) {
   event
     .save()
     .then(result => {
-      console.log(result);
+      // console.log(result);
       res.send(result);
   })
     .catch(err => {
@@ -30,7 +30,7 @@ router.get('/', function(req, res) {
   Event.find()
   .exec()
   .then(docs => {
-    console.log(docs);
+    //console.log(docs);
     if(docs.length >= 0){
       res.status(200).json(docs);
     } else {
@@ -47,12 +47,33 @@ router.get('/', function(req, res) {
   });
 });  //end of get
 
+router.get('/search', function(req, res) {
+  let title=req.query.title;
+
+  Event.findOne({title: title})
+    .exec()
+    .then(doc => {
+    //  console.log(doc);
+      if(doc) {
+        res.status(200).json(doc);
+      }else {
+         res.status(404).json({
+           message: "Event with given title does not exist"
+         });
+       }
+    })
+    .catch(err => {
+      console.log(err);
+      res.send(err);
+    });
+}); //end of get:id
+
 router.get('/:id', function(req, res) {
   let id =req.params.id;
   Event.findById(id)
     .exec()
     .then(doc => {
-      console.log(doc);
+    //  console.log(doc);
       if(doc) {
         res.status(200).json(doc);
       }else {
@@ -68,10 +89,10 @@ router.get('/:id', function(req, res) {
 }); //end of get:id
 
 router.patch('/:id', function(req, res) {
-  Event.updateOne({_id: ObjectId(req.params.id)}, {$set: req.body})
+  Event.updateOne({_id: req.params.id}, {$set: req.body})
     .exec()
     .then(result => {
-      console.log(result);
+    //  console.log(result);
       res.status(200).json(result);
     })
     .catch(err => {
@@ -86,6 +107,7 @@ router.delete('/:id', function(req, res) {
   Event.remove({_id: req.params.id})
     .exec()
     .then(result => {
+      console.log(result)
       res.status(200).json(result);
     })
     .catch(err => {
