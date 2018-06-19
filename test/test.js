@@ -12,7 +12,8 @@ describe('/GET events', () => {
       .end((err, res) => {
         res.should.have.status(200);
         done();
-      });
+      })
+
   });
 });
 
@@ -44,7 +45,7 @@ describe ('/POST event', () => {
 describe('/GET events/:id', () => {
   it('should return an event by id', (done) => {
     chai.request(server)
-      .get('/events/5b227d7c2f63c531d0c491d9')
+      .get('/events/5b28c4d144e27e33f1861226')
       .end((err, res) => {
         res.should.have.status(200);
         res.body.should.be.a('object');
@@ -56,15 +57,15 @@ describe('/GET events/:id', () => {
 describe('/PATCH events/:id', () => {
   it('should update an event', (done) => {
     chai.request(server)
-      .patch('/events/5b227d7c2f63c531d0c491d9')
+      .patch('/events/5b28c4d144e27e33f1861226')
       .send({description: "ewa"})
       .end((err, res) => {
         res.should.have.status(200);
         chai.request(server)
-        .get('/events/5b227d7c2f63c531d0c491d9')
+        .get('/events/5b28c4d144e27e33f1861226')
         .end((err, res) => {
           res.should.have.status(200);
-          res.body.description.should.equal('ewa');
+          res.body.description.should.equal("ewa");
           done();
         });
       });

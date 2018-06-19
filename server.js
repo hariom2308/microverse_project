@@ -11,6 +11,10 @@ let db = mongoose.connection;
 
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
+if(!module.parent) {
+   app.listen(3002, () => console.log('Example app listening on port 3002!'));
+}
+
 
 if(!module.parent){
   app.listen(3002, () => console.log('Example app listening on port 3002!'));
