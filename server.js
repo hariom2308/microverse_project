@@ -15,11 +15,6 @@ if(!module.parent) {
    app.listen(3002, () => console.log('Example app listening on port 3002!'));
 }
 
-
-if(!module.parent){
-  app.listen(3002, () => console.log('Example app listening on port 3002!'));
-}
-
 //-----------------------------monogdb
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function(err, client) {

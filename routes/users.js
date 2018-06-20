@@ -11,7 +11,7 @@ router.post('/', (req,res) => {
   .then(user => {
     if (user.length >= 1) {
       return res.status(409).json({
-        message: "email already exists"
+        message: "User with this email already exists"
       });
     }
   })
@@ -20,7 +20,7 @@ router.post('/', (req,res) => {
   .then(user => {
     if (user.length >= 1) {
       return res.status(409).json({
-        message: "user name already exists"
+        message: "User with this user name already exists"
       });
     } else {
       bcrypt.hash(req.body.email, 10, (err,hash) => {
