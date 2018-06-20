@@ -24,4 +24,4 @@ db.once('open', function(err, client) {
 });
 
 
-module.exports = app;
+module.exports = {app, db};
