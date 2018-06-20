@@ -23,4 +23,5 @@ db.once('open', function(err, client) {
   console.log("Connected successfully to server");
 });
 
-module.exports = app;
+
+module.exports = {app, db};
