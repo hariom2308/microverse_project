@@ -30,7 +30,6 @@ router.get('/', function(req, res) {
   Event.find()
   .exec()
   .then(docs => {
-    //console.log(docs);
     if(docs.length >= 0){
       res.status(200).json(docs);
     } else {
@@ -49,7 +48,6 @@ router.get('/', function(req, res) {
 
 router.get('/search', function(req, res) {
   let title=req.query.title;
-
   Event.findOne({title: title})
     .exec()
     .then(doc => {

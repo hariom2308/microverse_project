@@ -95,11 +95,11 @@ describe('/PATCH events/:id', () => {
 describe('/DELETE events/:id', () => {
   it('should DELETE an event by id', (done) => {
     chai.request(server)
-    .delete('/events/5b227d496b61f031aa88168c')
+    .delete('/events/5b27cc236e67cb0317412505')
     .end((err, res) => {
       res.should.have.status(200);
       chai.request(server)
-      .get('/events/5b227d496b61f031aa88168c')
+      .get('/events/5b27cc236e67cb0317412505')
       .end((err, res) => {
         res.should.have.status(404);
         done();
