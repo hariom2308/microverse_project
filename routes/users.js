@@ -1,9 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const server = require('../server');
-let mongoose = require('mongoose');
+const mongoose = require('mongoose');
 const User = require('../models/user');
-let bcrypt = require('bcrypt');
+
+//--authentication--
+const bcrypt = require('bcrypt');
+const passport = require('passport');
+const BasicStrategy = require('passport-http').BasicStrategy;
 
 router.post('/', (req,res) => {
   User.find({email: req.body.email})
@@ -15,6 +19,7 @@ router.post('/', (req,res) => {
       });
     }
   })
+
   User.find({userName: req.body.userName})
   .exec()
   .then(user => {
@@ -71,5 +76,7 @@ router.get('/', (req,res) => {
       error: err
     });
   });
-})
+});
+
+
 module.exports = router;
