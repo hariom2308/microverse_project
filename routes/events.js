@@ -10,7 +10,8 @@ router.post('/', function(req, res) {
     _id: new mongoose.Types.ObjectId,
     title: req.body.title,
     description: req.body.description,
-    date: req.body.date
+    date: req.body.date,
+    user: req.user
   });
   event
     .save()
@@ -87,18 +88,35 @@ router.get('/:id', function(req, res) {
 }); //end of get:id
 
 router.patch('/:id', function(req, res) {
-  Event.updateOne({_id: req.params.id}, {$set: req.body})
-    .exec()
-    .then(result => {
-    //  console.log(result);
-      res.status(200).json(result);
-    })
-    .catch(err => {
-      console.log(err);
-      res.status(500).json({
-        error: err
-      });
-    });
+  Event.findById(req.params.id)
+  .exec()
+  .then(event => {
+    console.log("=====================");
+    console.log(event);
+    console.log(".....................");
+    console.log(typeof event.user);
+    console.log(typeof req.user._id);
+      if(event.user && event.user.equals(req.user._id)){
+        console.log("Entered if condition");
+        Event.updateOne({_id: req.params.id}, {$set: req.body})
+          .exec()
+          .then(result => {
+          //  console.log(result);
+            res.status(200).json(result);
+          })
+          .catch(err => {
+            console.log(err);
+            res.status(500).json({
+              error: err
+            });
+          });
+      } else {
+        res.status(403).send('');
+      }
+  })
+  .catch( err =>{
+    res.status(404).send(err);
+  })
 }); //end of patch:id
 
 router.delete('/:id', function(req, res) {
